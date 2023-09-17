@@ -1,7 +1,12 @@
 #!/usr/bin/python3
 """ Console Module """
 import cmd
+import datetime
+import os
+import shlex
 import sys
+from uuid import uuid4
+import models
 from models.base_model import BaseModel
 from models.__init__ import storage
 from models.user import User
@@ -166,16 +171,21 @@ class HBNBCommand(cmd.Cmd):
                         except ValueError:
                             pass
 
-        """
-        Create a new instance of the class
-        with the given parameters
-        """
-        new_instance = HBNBCommand.classes[arguments[0]]()
-        for key, value in new_dict.items():
-            if key not in ignored_attrs:
-                setattr(new_instance, key, value)
-        new_instance.save()
-        print(new_instance.id)
+        if os.getenv('HBNB_TYPE_STORAGE') == 'db':
+            new_instance = HBNBCommand.classes[arguments[0]](**new_dict)
+            new_instance.save()
+            print(new_instance)
+        else:
+            """
+            Create a new instance of the class
+            with the given parameters
+            """
+            new_instance = HBNBCommand.classes[arguments[0]]()
+            for key, value in new_dict.items():
+                if key not in ignored_attrs:
+                    setattr(new_instance, key, value)
+            new_instance.save()
+            print(new_instance.id)
 
     def help_create(self):
         """ Help information for the create method """
@@ -257,14 +267,25 @@ class HBNBCommand(cmd.Cmd):
             if args not in HBNBCommand.classes:
                 print("** class doesn't exist **")
                 return
-            for k, v in storage._FileStorage__objects.items():
+            for k, v in storage.all(eval(args)).items():
                 if k.split('.')[0] == args:
                     print_list.append(str(v))
         else:
-            for k, v in storage._FileStorage__objects.items():
+            for k, v in storage.all().items():
                 print_list.append(str(v))
 
         print(print_list)
+        # args = shlex.split(args)
+        # if len(args) == 0:
+        #     my_dict = models.storage.all()
+        # else:
+        #     if args[0] in HBNBCommand.classes:
+        #         my_dict = models.storage.all(eval(args[0]))
+        #     else:
+        #         print("** class doesn't exist **")
+        #         return
+        # for v in my_dict.values():
+        #     print(v)
 
     def help_all(self):
         """ Help information for the all command """
