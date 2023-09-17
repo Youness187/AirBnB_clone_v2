@@ -120,7 +120,7 @@ class HBNBCommand(cmd.Cmd):
         """
         arguments = args.split(' ')
         ignored_attrs = ('id', 'created_at', 'updated_at', '__class__')
-        
+
         """ If no class name is given, print an error message"""
         if len(arguments) == 0:
             print("** class name missing **")
@@ -165,15 +165,15 @@ class HBNBCommand(cmd.Cmd):
                             new_dict[key] = int(value)
                         except ValueError:
                             pass
-        
+
         """
         Create a new instance of the class
         with the given parameters
-        """                        
+        """
         new_instance = HBNBCommand.classes[arguments[0]]()
         for key, value in new_dict.items():
-                if key not in ignored_attrs:
-                    setattr(new_instance, key, value)
+            if key not in ignored_attrs:
+                setattr(new_instance, key, value)
         new_instance.save()
         print(new_instance.id)
 
@@ -370,6 +370,7 @@ class HBNBCommand(cmd.Cmd):
         """ Help information for the update class """
         print("Updates an object with new information")
         print("Usage: update <className> <id> <attName> <attVal>\n")
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
