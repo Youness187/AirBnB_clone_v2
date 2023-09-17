@@ -174,7 +174,7 @@ class HBNBCommand(cmd.Cmd):
         if os.getenv('HBNB_TYPE_STORAGE') == 'db':
             new_instance = HBNBCommand.classes[arguments[0]](**new_dict)
             new_instance.save()
-            print(new_instance)
+            print(new_instance.id)
         else:
             """
             Create a new instance of the class
