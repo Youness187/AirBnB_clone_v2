@@ -1,3 +1,4 @@
 /hack
 test_params_create
 main_delete.py
+*.json
