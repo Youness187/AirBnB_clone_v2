@@ -17,7 +17,8 @@ class FileStorage:
                 if cls.__name__ in key:
                     tmp[key] = FileStorage.__objects[key]
             return tmp
-        return FileStorage.__objects
+        else:
+            return FileStorage.__objects
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
@@ -64,3 +65,5 @@ class FileStorage:
         """Delete object"""
         if obj is not None:
             del obj
+        else:
+            return
