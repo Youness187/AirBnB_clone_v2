@@ -64,6 +64,6 @@ class FileStorage:
     def delete(self, obj=None):
         """Delete object"""
         if obj is not None:
-            del obj
-        else:
-            return
+            dele = obj.to_dict()["__class__"] + "." + obj.id
+            if self.__objects[dele]:
+                del self.__objects[dele]
