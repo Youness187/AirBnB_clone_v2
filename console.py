@@ -145,7 +145,7 @@ class HBNBCommand(cmd.Cmd):
                             {attribute[0]: attribute[1].strip('"')}
                         )
                     elif (attribute[1].replace(".", "", 1).isdigit()
-                        or attribute[1].replace(".", "", 1).replace("-", "", 1)):
+                          or attribute[1].replace(".", "", 1).replace("-", "", 1)):
                         if attribute[1].isdigit():
                             new_instance.__dict__.update(
                                 {attribute[0]: int(attribute[1])}
@@ -154,7 +154,7 @@ class HBNBCommand(cmd.Cmd):
                             new_instance.__dict__.update(
                                 {attribute[0]: float(attribute[1])}
                             )
-        storage.save()
+        storage.new(new_instance)
         print(new_instance.id)
         storage.save()
 
@@ -238,14 +238,14 @@ class HBNBCommand(cmd.Cmd):
             if args not in HBNBCommand.classes:
                 print("** class doesn't exist **")
                 return
-            for k, v in storage._FileStorage__objects.items():
+            for k, v in storage.all(args).items():
                 if k.split(".")[0] == args:
                     print_list.append(str(v))
         else:
-            for k, v in storage._FileStorage__objects.items():
+            for k, v in storage.all(args).items():
                 print_list.append(str(v))
 
-        print(print_list)
+        print("[%s]" % ", ".join(map(str, print_list)))
 
     def help_all(self):
         """Help information for the all command"""

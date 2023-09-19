@@ -46,7 +46,7 @@ class DBStorage:
         objs = {}
         if cls:
             for name in classes:
-                if cls.__name__ == name:
+                if cls == name:
                     find = self.__session.query(classes[name]).all()
                     for i in find:
                         key = i.__class__.__name__ + "." + i.id
@@ -81,4 +81,4 @@ class DBStorage:
         Session = scoped_session(session_factory)
         if remove:
             Session.remove()
-        self.__session = Session()
+        self.__session = Session
