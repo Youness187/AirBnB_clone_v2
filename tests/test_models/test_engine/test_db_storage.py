@@ -27,7 +27,7 @@ class test_DB_Storage(unittest.TestCase):
                              db=os.getenv('HBNB_MYSQL_DB'))
         new_state = State(**{'name': 'California'})
         cur = db.cursor()
-        cur.execute('SELECT COUNT(*) FROM states:')
+        cur.execute('SELECT COUNT(*) FROM states;')
         old_count = cur.fetchall()
         cur.close()
         db.close()
