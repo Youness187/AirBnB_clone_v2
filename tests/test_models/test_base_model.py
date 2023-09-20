@@ -8,6 +8,8 @@ import json
 import os
 
 
+@unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db',
+                 'Base model test not supported')
 class test_basemodel(unittest.TestCase):
     """Testing BaseModel class"""
 
@@ -25,6 +27,8 @@ class test_basemodel(unittest.TestCase):
         """tearDown"""
         try:
             os.remove("file.json")
+        except Exception:
+            pass
 
     def test_default(self):
         """test default"""
