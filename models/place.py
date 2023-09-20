@@ -23,6 +23,8 @@ if models.storage_t == "db":
             primary_key=True,
         ),
     )
+else:
+    place_amenity = {}
 
 
 class Place(BaseModel, Base):
@@ -100,7 +102,3 @@ class Place(BaseModel, Base):
                 if isinstance(obj, Amenity):
                     if obj.id not in self.amenity_ids:
                         self.amenity_ids.append(obj.id)
-
-    def __init__(self, *args, **kwargs):
-        """initializes Place"""
-        super().__init__(*args, **kwargs)
