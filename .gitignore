@@ -1,5 +1,5 @@
 /hack
 test_params_create
-__pycache__
+*__pycache__
 main_delete.py
 *.json
