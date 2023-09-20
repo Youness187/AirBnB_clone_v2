@@ -17,7 +17,7 @@ class test_DB_Storage(unittest.TestCase):
     def test_documentation(self):
         """documentation test"""
         self.assertIsNot(DBStorage.__doc__, None)
-        
+
     def test_new_and_save(self):
         """Testing the new and save methods"""
         db = MySQLdb.connect(user=os.getenv('HBNB_MYSQL_USER'),
@@ -43,7 +43,7 @@ class test_DB_Storage(unittest.TestCase):
         self.assertEqual(new_count[0][0], old_count[0][0] + 1)
         cur.close()
         db.close()
-        
+
     def test_new(self):
         """ New object is correctly added to database """
         new = State(name='California')
