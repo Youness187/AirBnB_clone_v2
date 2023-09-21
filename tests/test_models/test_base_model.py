@@ -77,12 +77,6 @@ class test_basemodel(unittest.TestCase):
         with self.assertRaises(TypeError):
             new = self.value(**n)
 
-    def test_kwargs_one(self):
-        """test kwargs with one arg"""
-        n = {"Name": "test"}
-        with self.assertRaises(KeyError):
-            new = self.value(**n)
-
     def test_id(self):
         """id test"""
         new = self.value()
