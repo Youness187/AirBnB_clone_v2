@@ -2,7 +2,7 @@
 """
 Fabric script that creates and distributes an archive to your web servers
 """
-from fabric.api import run, env, put, local, run, runs_once
+from fabric.api import run, env, put, local, task, runs_once
 from datetime import datetime
 import os
 
