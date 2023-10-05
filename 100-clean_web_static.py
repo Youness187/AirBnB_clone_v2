@@ -70,6 +70,9 @@ def deploy():
 
 @task
 def do_clean(number=0):
+    """
+    Fabric script that deletes out-of-date archives
+    """
     try:
         number = int(number)
         if number < 0:
