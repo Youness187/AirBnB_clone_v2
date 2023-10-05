@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-"""
-Fabric script that distributes an archive to your web servers
-"""
+# Fabric script that distributes an archive to your web servers
 from fabric.api import run, env, put, task
 import os
 
@@ -11,9 +9,7 @@ env.user = "ubuntu"
 
 @task
 def do_deploy(archive_path):
-    """
-    Fabric script that distributes an archive to your web servers
-    """
+    # Fabric script that distributes an archive to your web servers
     try:
         if not os.path.exists(archive_path):
             return False
