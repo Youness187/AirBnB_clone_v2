@@ -19,7 +19,7 @@ def do_deploy(archive_path):
             return False
         put(archive_path, "/tmp/")
 
-        archive_file = archive_path.split("/")[-1]
+        archive_file = os.path.basename(archive_path)
         release_path = "/data/web_static/releases/{}".format(
             os.path.splitext(archive_file)[0]
         )
