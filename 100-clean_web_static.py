@@ -79,14 +79,14 @@ def do_clean(number=0):
             number = 0
 
         local(
-            "ls -t versions/ | tail -n +{} \
-            | xargs -I {{}} rm versions/{{}}".format(
+            "ls -dt versions/* | tail -n +{} \
+        | sudo xargs rm -fr".format(
                 number + 1
             )
         )
         run(
-            "ls -t /data/web_static/releases/ | tail -n +{} \
-            | xargs -I {{}} rm -rf /data/web_static/releases/{{}}".format(
+            "ls -dt /data/web_static/releases/* | tail -n +{} \
+        | sudo xargs rm -fr".format(
                 number + 1
             )
         )
