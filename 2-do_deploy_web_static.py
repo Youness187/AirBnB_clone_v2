@@ -17,12 +17,12 @@ def do_deploy(archive_path):
     try:
         if not os.path.exists(archive_path):
             return False
-        put(archive_path, "/tmp/")
 
         archive_file = os.path.basename(archive_path)
         release_path = "/data/web_static/releases/{}".format(
             os.path.splitext(archive_file)[0]
         )
+        put(archive_path, "/tmp/")
         run("mkdir -p {}".format(release_path))
 
         run("tar -xzf /tmp/{} -C {}".format(archive_file, release_path))
