@@ -2,13 +2,14 @@
 """
 Fabric script that creates and distributes an archive to your web servers
 """
-from fabric.api import run, env, put, local
+from fabric.api import run, env, put, local, run, runs_once
 from datetime import datetime
 import os
 
 env.hosts = ["54.173.75.28", "54.197.74.184"]
 
 
+@runs_once
 def do_pack():
     """
     Fabric script that generates a .tgz
@@ -23,6 +24,7 @@ def do_pack():
     return None
 
 
+@task
 def do_deploy(archive_path):
     """
     Fabric script that distributes an archive to your web servers
@@ -54,6 +56,7 @@ def do_deploy(archive_path):
         return False
 
 
+@task
 def deploy():
     """
     Fabric script that creates and distributes an archive to your web servers
