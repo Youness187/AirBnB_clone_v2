@@ -2,13 +2,14 @@
 """
 # Fabric script that distributes an archive to your web servers
 """
-from fabric.api import run, env, put
+from fabric.api import run, env, put, task
 import os
 
 env.hosts = ["54.173.75.28", "54.197.74.184"]
 env.user = "ubuntu"
 
 
+@task
 def do_deploy(archive_path):
     """
     Fabric script that distributes an archive to your web servers
