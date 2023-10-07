@@ -24,7 +24,7 @@ def do_deploy(archive_path):
         put(archive_path, "/tmp/")
         run("mkdir -p {}".format(release_path))
 
-        run("tar -xzf /tmp/{} -C {}".format(archive_file, release_path))
+        run("tar -xzf /tmp/{} -C {}/".format(archive_file, release_path))
 
         run("rm /tmp/{}".format(archive_file))
 
@@ -34,9 +34,9 @@ def do_deploy(archive_path):
 
         old_symlink = "/data/web_static/current"
         if os.path.exists(old_symlink):
-            run("rm {}".format(old_symlink))
+            run("rm -fr {}".format(old_symlink))
 
-        run("ln -s {} /data/web_static/current".format(release_path))
+        run("ln -s {}/ /data/web_static/current".format(release_path))
 
         return True
     except Exception:
