@@ -15,7 +15,7 @@ def states_list(strict_slashes=False):
 
 
 @app.teardown_appcontext
-def down(exception):
+def teardown(exception):
     """close storage"""
     storage.close()
 
