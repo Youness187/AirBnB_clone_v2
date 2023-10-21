@@ -43,21 +43,21 @@ class DBStorage:
 
     def all(self, cls=None):
         """all"""
-        objs = {}
+        dict_objs = {}
         if cls:
             for name in classes:
-                if cls == name:
+                if cls.__name__ == name:
                     find = self.__session.query(classes[name]).all()
                     for i in find:
                         key = i.__class__.__name__ + "." + i.id
-                        objs[key] = i
-        else:
+                        dict_objs[key] = i
+        elif cls is None:
             for name in classes:
                 find = self.__session.query(classes[name]).all()
                 for i in find:
                     key = i.__class__.__name__ + "." + i.id
-                    objs[key] = i
-        return objs
+                    dict_objs[key] = i
+        return dict_objs
 
     def new(self, obj):
         """new"""
@@ -76,8 +76,7 @@ class DBStorage:
     def reload(self, remove=False):
         """reload"""
         Base.metadata.create_all(self.__engine)
-        session_factory = sessionmaker(bind=self.__engine,
-                                       expire_on_commit=False)
+        session_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(session_factory)
         if remove:
             Session.remove()
